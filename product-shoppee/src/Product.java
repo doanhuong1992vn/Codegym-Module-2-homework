@@ -1,4 +1,3 @@
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -6,7 +5,6 @@ import java.util.Date;
 public class Product {
     private String name;
     private int view;
-//    private Date postingTime;
     private String postingTime;
     private int timesPurchase;
     private double price;
@@ -23,25 +21,14 @@ public class Product {
         return name;
     }
 
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-
     public int getView() {
         return view;
     }
-
-//    public void setView(int view) {
-//        this.view = view;
-//    }
 
     public Date getPostingTime() throws ParseException {
         return new SimpleDateFormat("yyyy/MM/dd").parse(postingTime);
     }
 
-//    public void setPostingTime(String postingTime) {
-//        this.postingTime = postingTime;
-//    }
     public long getMillisOfPostingTime() throws ParseException {
         return getPostingTime().getTime();
     }
@@ -49,22 +36,12 @@ public class Product {
     public int getTimesPurchase() {
         return timesPurchase;
     }
-
-//    public void setTimesPurchase(int timesPurchase) {
-//        this.timesPurchase = timesPurchase;
-//    }
-
     public double getPrice() {
         return price;
     }
-
-//    public void setPrice(double price) {
-//        this.price = price;
-//    }
-
     @Override
     public String toString() {
-        String dateToString = null;
+        String dateToString;
         try {
             dateToString = new SimpleDateFormat("dd/MM/yyyy").format(getPostingTime());
         } catch (ParseException e) {

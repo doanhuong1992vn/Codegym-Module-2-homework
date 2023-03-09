@@ -1,7 +1,5 @@
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.Scanner;
 
 public class ProductSortTest {
@@ -15,8 +13,8 @@ public class ProductSortTest {
         Scanner input = new Scanner(System.in);
         System.out.println("Welcome Man Shop!");
         renderProductList(products);
-        int choice = -1;
-        while(choice != 0) {
+        int choice;
+        while(true) {
             renderChoice();
             choice = input.nextInt();
             final int POPULAR = 1;
