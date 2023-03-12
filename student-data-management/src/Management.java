@@ -1,4 +1,7 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
 
 public class Management {
     private static final Scanner input = new Scanner(System.in);
@@ -31,6 +34,7 @@ public class Management {
                 renderStartMenu();
             }
             case EDIT_STUDENT -> {
+                renderSortedStudentsByID();
                 long id = getInputID();
                 if (checkID(id)) {
                     editStudentById();
@@ -40,6 +44,7 @@ public class Management {
                 }
             }
             case DELETE_STUDENT -> {
+                renderSortedStudentsByID();
                 long id = getInputID();
                 if (checkID(id)) {
                     removeStudentByID();
@@ -48,7 +53,10 @@ public class Management {
                     renderStartMenu();
                 }
             }
-            case SHOW_STUDENTS -> choiceToSort();
+            case SHOW_STUDENTS -> {
+                renderSortedStudentsByID();
+                choiceToSort();
+            }
             case FIND_BY_ID -> {
                 long id = getInputID();
                 if (checkID(id)) {
@@ -74,6 +82,12 @@ public class Management {
                 renderStartMenu();
             }
         }
+    }
+
+    private void renderSortedStudentsByID() {
+        System.out.println("Students List: ");
+        students.sort(Comparator.comparingLong(Student::getId));
+        students.forEach(System.out::println);
     }
 
     private static int getChoice() {
@@ -144,12 +158,14 @@ public class Management {
     }
 
     private void sortByGpaAndRender() {
+        System.out.println("Students List Sorted By GPA: ");
         students.sort(Comparator.comparingDouble(Student::getGpa).reversed());
         students.forEach(System.out::println);
         choiceWhenSort();
     }
 
     private void sortByNameAndRender() {
+        System.out.println("Students List Sorted By Name: ");
         Collections.sort(students);
         students.forEach(System.out::println);
         choiceWhenSort();
@@ -173,16 +189,17 @@ public class Management {
 
     private void removeStudentByID() {
         final String nameStudent = currentStudent.getName();
-        System.out.println("Do you confirm to delete " + nameStudent + "? (Y/N)");
+        System.out.println("Do you confirm to delete " + nameStudent + "? (Yes/No)");
         String choice = input.nextLine();
-        final String YES = "Y";
-        final String NO = "N";
         switch (choice) {
-            case YES -> {
+            case "Y", "y", "YES", "yes", "Yes" -> {
                 students.remove(currentStudent);
                 System.out.println(nameStudent + " has been removed from the students list.");
             }
-            case NO -> renderStartMenu();
+            case "N", "n", "NO", "no", "No" -> {
+                System.out.println("OK, " + nameStudent + " has been kept on Students List");
+                renderStartMenu();
+            }
             default -> {
                 System.out.println("Invalid input!");
                 removeStudentByID();
