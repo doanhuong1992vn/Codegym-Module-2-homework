@@ -42,7 +42,7 @@ public class UserService {
                 return false;
             }
         } else {
-            System.out.println("Username" + userName + "does not exist");
+            System.out.println("Username " + userName + " does not exist");
             return false;
         }
     }

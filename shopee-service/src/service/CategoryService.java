@@ -29,17 +29,17 @@ public class CategoryService {
 
     public void addCategory(Category newCategory){
         if(categoriesList.contains(newCategory)){
-            System.out.println("Add failed. " + newCategory +  " already in the catalog");
+            System.out.println("Add failed. " + newCategory.getName() +  " already in the catalog");
         } else {
             categoriesList.add(newCategory);
-            System.out.println(newCategory + " have been successfully added to the catalog");
+            System.out.println(newCategory.getName() + " have been successfully added to the catalog");
         }
     }
 
     public void removeCategory(long id){
         if(checkIdAndSetCurrentCategoryIfAvailable(id)) {
             categoriesList.remove(currentCategory);
-            System.out.println(currentCategory + " have been removed from the catalog");
+            System.out.println(currentCategory.getName() + " have been removed from the catalog");
         } else {
             System.out.println("Remove failed. ID " + id + " not in the catalog");
         }
